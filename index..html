@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOTEL BERGHOF GUEST EXPERIENCE</title>
+  <style>
+    :root{
+      --bg:#f8f1e7;
+      --bg-soft:#fcf7f1;
+      --card:#ffffff;
+      --orange:#c9825d;
+      --orange-dark:#b66d4a;
+      --red:#8d5a58;
+      --text:#3f332f;
+      --muted:#6e615d;
+      --line:#ead9c9;
+      --shadow:0 10px 28px rgba(124,84,62,0.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#f6ecdf 0%, #fbf6ef 220px, #f9f3ec 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+    .hero{
+      text-align:center;
+      padding:56px 20px 34px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(251,245,236,.98) 0%, rgba(248,241,231,.98) 100%);
+    }
+    .hotel-name{
+      color:var(--orange);
+      text-transform:uppercase;
+      font-weight:700;
+      font-size:clamp(28px, 5vw, 56px);
+      line-height:.93;
+      letter-spacing:.06em;
+      margin:0;
+    }
+    .location{
+      margin-top:10px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:15px;
+    }
+    .welcome{
+      margin:26px 0 8px;
+      color:var(--orange);
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(40px, 6vw, 64px);
+      line-height:1;
+      font-weight:700;
+    }
+    .guide{
+      margin:6px 0 10px;
+      color:var(--red);
+      font-size:clamp(22px, 3vw, 34px);
+      font-weight:700;
+    }
+    .subtitle{
+      max-width:860px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:18px;
+    }
+    .top-actions{
+      margin-top:20px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      align-items:center;
+    }
+    .flag-btn,.link-btn,.nav-btn{
+      border:1px solid var(--orange);
+      background:transparent;
+      color:var(--orange-dark);
+      border-radius:999px;
+      padding:10px 16px;
+      font-weight:700;
+      font-size:14px;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .flag-btn.active,.link-btn.primary,.nav-btn.primary{
+      background:var(--orange-dark);
+      color:#fff;
+      border-color:var(--orange-dark);
+    }
+    .nav{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+    }
+    .container{
+      width:min(1120px, 93%);
+      margin:28px auto 54px;
+    }
+    .section-title{
+      margin:30px 0 10px;
+      color:var(--red);
+      font-size:33px;
+      font-family:Georgia, "Times New Roman", serif;
+    }
+    .section-subtitle{
+      color:var(--muted);
+      margin:0 0 14px;
+      font-size:17px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{
+      margin:0 0 10px;
+      color:var(--red);
+      font-size:24px;
+      font-family:Georgia, "Times New Roman", serif;
+    }
+    .card p{margin:0 0 10px;color:var(--muted)}
+    .card ul{margin:8px 0 0;padding-left:20px}
+    .card li{margin:8px 0}
+    .highlight{
+      background:var(--bg-soft);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+      margin-top:18px;
+    }
+    .small{font-size:14px;color:var(--muted)}
+    .pill{
+      display:inline-block;
+      margin:4px 6px 0 0;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#f3e3d6;
+      color:var(--red);
+      font-size:13px;
+      font-weight:700;
+    }
+    .review-stars{
+      font-size:24px;
+      letter-spacing:4px;
+      color:var(--orange);
+      margin:8px 0 2px;
+    }
+    .lang{display:none}
+    .lang.active{display:block}
+    .footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      padding:12px 20px 38px;
+    }
+    .icon{
+      font-size:16px;
+      margin-right:6px;
+    }
+    @media (max-width:700px){
+      .hotel-name{font-size:38px}
+      .welcome{font-size:46px}
+      .guide{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hotel-name">Hotel<br>Berghof<br>Amaranth</div>
+    <div class="location">Wilderswil · Interlaken</div>
+    <div class="welcome">Grüezi &amp; Welcome</div>
+    <div class="guide">Spring &amp; Summer Guest Guide</div>
+
+    <div class="lang active" data-lang="en">
+      <p class="subtitle">We wish you a pleasant stay with us. Here you will find the most important hotel information, transport details, nearby restaurants, family activities, hiking ideas, dog-friendly tips and useful regional links.</p>
+    </div>
+    <div class="lang" data-lang="de">
+      <p class="subtitle">Wir wünschen Ihnen einen angenehmen Aufenthalt bei uns. Hier finden Sie die wichtigsten Hotelinformationen, Transportdetails, Restaurants in der Nähe, Familienaktivitäten, Wandervorschläge, hundefreundliche Tipps und nützliche regionale Links.</p>
+    </div>
+
+    
+    <div class="top-actions" style="justify-content:flex-end; max-width:1120px; margin:20px auto 0; padding-right:10px;">
+      <button class="flag-btn active" data-setlang="en" style="padding:6px 8px; border:none; background:transparent; font-size:20px;">🇬🇧</button>
+      <button class="flag-btn" data-setlang="de" style="padding:6px 8px; border:none; background:transparent; font-size:20px;">🇩🇪</button>
+      <a class="link-btn" href="https://www.instagram.com/hotelberghof_amaranth?igsh=MXU2cXVsend2dDZtMg%3D%3D&utm_source=qr" target="_blank" rel="noopener" style="padding:6px 8px; border:none; background:transparent;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:20px;height:20px;display:block;">
+      </a>
+      <a class="link-btn" href="https://www.facebook.com/share/1Cuy86C95R/?mibextid=wwXIfr" target="_blank" rel="noopener" style="padding:6px 8px; border:none; background:transparent;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width:20px;height:20px;display:block;">
+      </a>
+    </div>
+
+    <div class="nav">
+
+      <a class="nav-btn primary" href="#hotel-info">Hotel Info</a>
+      <a class="nav-btn" href="#transport">Transport</a>
+      <a class="nav-btn" href="#restaurants">Restaurants</a>
+      <a class="nav-btn" href="#hikes">Hikes</a>
+      <a class="nav-btn" href="#family">Family</a>
+      <a class="nav-btn" href="#dogs">Dogs</a>
+      <a class="nav-btn" href="#rainy">Rainy Days</a>
+      <a class="nav-btn" href="#tickets">Travel & Tickets</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="hotel-info">
+      <h2 class="section-title">Hotel Information</h2>
+
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">All key information for your stay in one simple mobile page.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Alle wichtigen Informationen für Ihren Aufenthalt auf einer einfachen mobilen Seite.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Reception</h3>
+          <div class="lang active" data-lang="en"><p><strong>08:00 – 22:00</strong></p></div>
+          <div class="lang" data-lang="de"><p><strong>08:00 – 22:00 Uhr</strong></p></div>
+        </div>
+
+        <div class="card">
+          <h3>Breakfast / Frühstück</h3>
+          <p><strong>07:00 – 10:00</strong></p>
+        </div>
+
+        <div class="card">
+          <h3>Wi‑Fi / WLAN</h3>
+          <p><strong>Network:</strong> Hotel Berghof</p>
+          <p><strong>Password:</strong> Berg-2026</p>
+        </div>
+
+        <div class="card">
+          <h3>Check-out</h3>
+          <div class="lang active" data-lang="en"><p><strong>11:00</strong></p></div>
+          <div class="lang" data-lang="de"><p><strong>11:00 Uhr</strong></p></div>
+        </div>
+
+        <div class="card">
+          <h3>Important Information</h3>
+          <div class="lang active" data-lang="en">
+            <ul>
+              <li>Pets allowed: <strong>15 CHF / night</strong></li>
+              <li>Quiet time after <strong>22:00</strong></li>
+              <li>No smoking inside</li>
+              <li>Smoking only on the balcony or in the garden</li>
+            </ul>
+          </div>
+          <div class="lang" data-lang="de">
+            <ul>
+              <li>Haustiere erlaubt: <strong>15 CHF / Nacht</strong></li>
+              <li>Ruhezeit ab <strong>22:00 Uhr</strong></li>
+              <li>Rauchen im Innenbereich verboten</li>
+              <li>Rauchen nur auf dem Balkon oder im Garten erlaubt</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Emergency Contact / Notfallkontakt</h3>
+          <p><strong>+41 (0) 76 752 94 07</strong></p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <div class="lang active" data-lang="en">
+          <strong>Leave us a review</strong><br>
+          We hope you enjoyed your stay with us. Your feedback means a lot to our team and helps future guests discover HOTEL BERGHOF GUEST EXPERIENCE.
+        </div>
+        <div class="lang" data-lang="de">
+          <strong>Bewerten Sie uns</strong><br>
+          Wir hoffen, Sie haben Ihren Aufenthalt bei uns genossen. Ihr Feedback bedeutet unserem Team viel und hilft zukünftigen Gästen, das HOTEL BERGHOF GUEST EXPERIENCE zu entdecken.
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <a class="link-btn primary" href="https://hotel-berghof.ch/" target="_blank" rel="noopener">Official Hotel Website</a>
+      </div>
+    </section>
+
+    <section id="transport">
+      <h2 class="section-title">Transport from the Hotel</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Easy directions for reaching Interlaken and getting back to the hotel.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Einfache Informationen für die Fahrt nach Interlaken und zurück zum Hotel.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Nearest Bus Stop</h3>
+          <div class="lang active" data-lang="en">
+            <p><strong>Wilderswil, Lehngasse</strong></p>
+            <p>Approx. <strong>350 metres</strong> from the hotel</p>
+            <p>Around <strong>2 minutes on foot</strong></p>
+          </div>
+          <div class="lang" data-lang="de">
+            <p><strong>Wilderswil, Lehngasse</strong></p>
+            <p>Ca. <strong>350 Meter</strong> vom Hotel entfernt</p>
+            <p>Etwa <strong>2 Minuten zu Fuss</strong></p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Bus to Interlaken</h3>
+          <div class="lang active" data-lang="en">
+            <p>Please take <strong>Bus 105</strong> from <strong>Wilderswil, Lehngasse</strong>.</p>
+            <p>This is the easiest connection towards Interlaken.</p>
+            <p class="small">Please use the same stop for your return journey to the hotel.</p>
+          </div>
+          <div class="lang" data-lang="de">
+            <p>Bitte nehmen Sie den <strong>Bus 105</strong> ab <strong>Wilderswil, Lehngasse</strong>.</p>
+            <p>Dies ist die einfachste Verbindung Richtung Interlaken.</p>
+            <p class="small">Bitte benutzen Sie für die Rückfahrt zum Hotel dieselbe Haltestelle.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Useful Travel Tools</h3>
+          <a class="link-btn primary" href="https://www.sbb.ch/en" target="_blank" rel="noopener">SBB Timetable</a>
+          <a class="link-btn" href="https://www.sbb.ch/en/travel-information/apps/sbb-mobile.html" target="_blank" rel="noopener">SBB Mobile App</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="restaurants">
+      <h2 class="section-title">Restaurants Nearby</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">As we serve breakfast only, these nearby options are convenient for lunch and dinner.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Da wir nur Frühstück anbieten, sind diese Restaurants in der Nähe praktisch für Mittag- und Abendessen.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Very Close to the Hotel</h3>
+          <ul>
+            <li><strong>Restaurant Hotel Alpenblick</strong> – 350 m</li>
+            <li><strong>Restaurant Hotel Bären</strong> – 400 m</li>
+            <li><strong>Wydi Pub</strong> – 600 m</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>More Options in Wilderswil</h3>
+          <ul>
+            <li><strong>Ristorante Pizzeria Luna Piccante</strong> – 1.1 km</li>
+            <li><strong>Jungfrau Hotel – Restaurant zum Chochtopf</strong> – 1.2 km</li>
+            <li><strong>Restaurant Hotel Hirschen</strong> – 1.3 km</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Helpful Tip</h3>
+          <div class="lang active" data-lang="en">
+            <p>Our team will be happy to recommend nearby options for lunch and dinner.</p>
+            <p class="small">Interlaken also offers many additional restaurants and is easy to reach by Bus 105.</p>
+          </div>
+          <div class="lang" data-lang="de">
+            <p>Unser Team empfiehlt Ihnen gerne Restaurants in der Nähe für Mittag- und Abendessen.</p>
+            <p class="small">Auch in Interlaken gibt es viele weitere Restaurants, die mit dem Bus 105 leicht erreichbar sind.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hikes">
+      <h2 class="section-title">Spring & Summer Hikes</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Popular hiking and panoramic options for guests visiting from April onwards.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Beliebte Wander- und Panoramaideen für Gäste ab April.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Schynige Platte</h3>
+          <div class="lang active" data-lang="en"><p>Classic panoramic mountain excursion directly connected to Wilderswil.</p></div>
+          <div class="lang" data-lang="de"><p>Klassischer Panorama-Bergausflug mit direkter Verbindung ab Wilderswil.</p></div>
+          <span class="pill">Views</span><span class="pill">Mountain railway</span><span class="pill">Great from Wilderswil</span>
+          <p style="margin-top:12px;"><a class="link-btn primary" href="https://www.jungfrau.ch/en-gb/schynige-platte/" target="_blank" rel="noopener">Official Info</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Lauterbrunnen Valley Walk</h3>
+          <div class="lang active" data-lang="en"><p>Beautiful valley scenery, waterfalls and an easier walk for many guests.</p></div>
+          <div class="lang" data-lang="de"><p>Wunderschöne Talszenerie, Wasserfälle und ein einfacher Spaziergang für viele Gäste.</p></div>
+          <span class="pill">Easy walk</span><span class="pill">Waterfalls</span>
+        </div>
+
+        <div class="card">
+          <h3>Harder Kulm</h3>
+          <div class="lang active" data-lang="en"><p>One of the best viewpoints over Interlaken, Lake Thun and Lake Brienz.</p></div>
+          <div class="lang" data-lang="de"><p>Einer der schönsten Aussichtspunkte über Interlaken, den Thunersee und den Brienzersee.</p></div>
+          <span class="pill">Panorama</span><span class="pill">Funicular</span>
+          <p style="margin-top:12px;"><a class="link-btn primary" href="https://www.jungfrau.ch/en-gb/harder-kulm/" target="_blank" rel="noopener">Official Info</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Grindelwald-First</h3>
+          <div class="lang active" data-lang="en"><p>Mountain views, hiking and adventure activities in spring and summer.</p></div>
+          <div class="lang" data-lang="de"><p>Bergpanorama, Wanderungen und Abenteueraktivitäten im Frühling und Sommer.</p></div>
+          <span class="pill">Adventure</span><span class="pill">Hiking</span>
+          <p style="margin-top:12px;"><a class="link-btn primary" href="https://www.jungfrau.ch/en-gb/grindelwaldfirst/" target="_blank" rel="noopener">Official Info</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="family">
+      <h2 class="section-title">Family Activities</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Simple ideas for families staying in the region.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Einfache Ideen für Familien, die in der Region übernachten.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Boat Trips</h3>
+          <div class="lang active" data-lang="en"><p>Enjoy family-friendly outings on Lake Thun or Lake Brienz.</p></div>
+          <div class="lang" data-lang="de"><p>Familienfreundliche Ausflüge auf dem Thunersee oder Brienzersee.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Scenic Train Rides</h3>
+          <div class="lang active" data-lang="en"><p>Train journeys in the Jungfrau region are a great experience for adults and children.</p></div>
+          <div class="lang" data-lang="de"><p>Zugfahrten in der Jungfrauregion sind ein tolles Erlebnis für Erwachsene und Kinder.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Grindelwald-First</h3>
+          <div class="lang active" data-lang="en"><p>Popular for family adventures, views and outdoor fun.</p></div>
+          <div class="lang" data-lang="de"><p>Beliebt für Familienabenteuer, Aussicht und Spass im Freien.</p></div>
+          <a class="link-btn primary" href="https://www.jungfrau.ch/en-gb/grindelwaldfirst/" target="_blank" rel="noopener">Official Info</a>
+        </div>
+
+        <div class="card">
+          <h3>Interlaken Day Out</h3>
+          <div class="lang active" data-lang="en"><p>Perfect for a relaxed family day with shopping, cafés, walks and lake views.</p></div>
+          <div class="lang" data-lang="de"><p>Perfekt für einen entspannten Familientag mit Shopping, Cafés, Spaziergängen und Seeblick.</p></div>
+          <a class="link-btn primary" href="https://www.interlaken.swiss/en/" target="_blank" rel="noopener">Interlaken Tourism</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="dogs">
+      <h2 class="section-title">Four-Legged Friends</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Useful tips for guests travelling with dogs.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Nützliche Tipps für Gäste, die mit Hund reisen.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>At the Hotel</h3>
+          <div class="lang active" data-lang="en">
+            <ul>
+              <li>Dogs are welcome: <strong>15 CHF / night</strong></li>
+              <li>Please keep dogs on a leash in public areas</li>
+              <li>Many walks in the region are dog-friendly</li>
+            </ul>
+          </div>
+          <div class="lang" data-lang="de">
+            <ul>
+              <li>Hunde sind willkommen: <strong>15 CHF / Nacht</strong></li>
+              <li>Bitte halten Sie Hunde in den öffentlichen Bereichen an der Leine</li>
+              <li>Viele Spazier- und Wanderwege in der Region sind hundefreundlich</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Dog-Friendly Hikes</h3>
+          <ul>
+            <li><strong>Lauterbrunnen Valley</strong> – easy and suitable for dogs</li>
+            <li><strong>Lake Thun & Lake Brienz walks</strong> – relaxed and scenic</li>
+            <li><strong>Schynige Platte</strong> – good area for hiking with dogs</li>
+            <li><strong>Grindelwald area</strong> – many open trails</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Gondolas & Trains</h3>
+          <div class="lang active" data-lang="en">
+            <ul>
+              <li>Dogs are allowed on most trains and gondolas</li>
+              <li>A ticket for dogs may be required</li>
+              <li>SBB offers dog travel options and day passes</li>
+              <li>Please ask reception before your excursion</li>
+            </ul>
+          </div>
+          <div class="lang" data-lang="de">
+            <ul>
+              <li>Hunde sind in den meisten Zügen und Gondeln erlaubt</li>
+              <li>Für Hunde kann ein Ticket erforderlich sein</li>
+              <li>Die SBB bietet Hundebillette und Tageskarten an</li>
+              <li>Bitte fragen Sie vor Ihrem Ausflug an der Rezeption nach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rainy">
+      <h2 class="section-title">Rainy Day Ideas</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Useful options when the weather is not ideal.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Praktische Ideen, wenn das Wetter nicht ideal ist.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Interlaken</h3>
+          <div class="lang active" data-lang="en"><p>Visit cafés, shops and covered areas in town for an easy day out.</p></div>
+          <div class="lang" data-lang="de"><p>Besuchen Sie Cafés, Geschäfte und überdachte Bereiche in der Stadt für einen entspannten Ausflug.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Museums & Exhibitions</h3>
+          <div class="lang active" data-lang="en"><p>Ask reception about local museums and current indoor suggestions in the region.</p></div>
+          <div class="lang" data-lang="de"><p>Fragen Sie an der Rezeption nach lokalen Museen und aktuellen Indoor-Tipps in der Region.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Wellness Time</h3>
+          <div class="lang active" data-lang="en"><p>Enjoy a calm day with spa or wellness options in the region.</p></div>
+          <div class="lang" data-lang="de"><p>Geniessen Sie einen ruhigen Tag mit Spa- oder Wellnessmöglichkeiten in der Region.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Tourism Tips</h3>
+          <div class="lang active" data-lang="en"><p>Official ideas for families, excursions and rainy day inspiration.</p></div>
+          <div class="lang" data-lang="de"><p>Offizielle Ideen für Familien, Ausflüge und Inspiration bei Regenwetter.</p></div>
+          <a class="link-btn primary" href="https://www.interlaken.swiss/en/experiences" target="_blank" rel="noopener">Explore Activities</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="tickets">
+      <h2 class="section-title">Travel & Tickets</h2>
+      <div class="lang active" data-lang="en">
+        <p class="section-subtitle">Official links for planning transport and excursions.</p>
+      </div>
+      <div class="lang" data-lang="de">
+        <p class="section-subtitle">Offizielle Links für Transportplanung und Ausflüge.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>SBB Trains</h3>
+          <div class="lang active" data-lang="en"><p>Check timetables, platforms and tickets online.</p></div>
+          <div class="lang" data-lang="de"><p>Prüfen Sie Fahrpläne, Gleise und Tickets online.</p></div>
+          <a class="link-btn primary" href="https://www.sbb.ch/en" target="_blank" rel="noopener">Open SBB</a>
+        </div>
+
+        <div class="card">
+          <h3>Jungfrau Tickets</h3>
+          <div class="lang active" data-lang="en"><p>Mountain railway tickets and regional excursion information.</p></div>
+          <div class="lang" data-lang="de"><p>Bergbahntickets und Informationen zu regionalen Ausflügen.</p></div>
+          <a class="link-btn primary" href="https://www.jungfrau.ch/en-gb/prices-and-tickets/" target="_blank" rel="noopener">Open Tickets</a>
+        </div>
+
+        <div class="card">
+          <h3>Tickets at Reception</h3>
+          <div class="lang active" data-lang="en"><p>Train tickets for the Jungfrau region and the <strong>Top of Europe Pass</strong> are also available at reception.</p></div>
+          <div class="lang" data-lang="de"><p>Bahntickets für die Jungfrauregion und der <strong>Top of Europe Pass</strong> sind auch an der Rezeption erhältlich.</p></div>
+        </div>
+
+        <div class="card">
+          <h3>Guest Card</h3>
+          <div class="lang active" data-lang="en"><p>Your guest card offers local public transport benefits within the valid area and useful regional advantages.</p></div>
+          <div class="lang" data-lang="de"><p>Ihre Gästekarte bietet Vorteile im lokalen öffentlichen Verkehr im Gültigkeitsbereich sowie weitere regionale Vergünstigungen.</p></div>
+          <a class="link-btn primary" href="https://www.interlaken.swiss/en/info-service/gaestekarten/interlaken-guest-card" target="_blank" rel="noopener">Guest Card Info</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    Hotel Berghof Guest Experience
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-setlang]');
+    const langBlocks = document.querySelectorAll('.lang');
+
+    function setLanguage(lang) {
+      langBlocks.forEach(block => {
+        block.classList.toggle('active', block.dataset.lang === lang);
+      });
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.setlang === lang);
+      });
+      document.documentElement.lang = lang;
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.setlang));
+    });
+  </script>
+</body>
+</html>
